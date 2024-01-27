@@ -1,16 +1,15 @@
-package com.org.test.geminisample
+package com.org.test.geminisample.summary.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
+import com.org.test.geminisample.SummarizeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class SummarizeViewModel(
-    private val generativeModel: GenerativeModel
-) : ViewModel() {
+class SummarizeViewModel(private val generativeModel: GenerativeModel) : ViewModel() {
 
     private val _uiState: MutableStateFlow<SummarizeUiState> =
         MutableStateFlow(SummarizeUiState.Initial)
