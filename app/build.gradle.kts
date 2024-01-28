@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -70,4 +71,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //okhttp
+    implementation(libs.okhttp)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    // Dagger 2
+    implementation(libs.dagger)
+    kapt(libs.google.dagger.compiler)
+    implementation(libs.dagger.android)
+    implementation(libs.google.dagger.android.support)
+    kapt(libs.google.dagger.android.processor)
 }

@@ -1,6 +1,13 @@
 [versions]
 agp = "8.4.0-alpha07"
+converterGson = "2.9.0"
+dagger = "2.48"
+daggerAndroid = "2.40.5"
+daggerAndroidProcessor = "2.40.5"
+daggerAndroidSupport = "2.40.5"
+daggerCompiler = "2.48"
 kotlin = "1.9.0"
+#kotlin = "1.6.10"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -11,9 +18,18 @@ activityCompose = "1.8.0"
 composeBom = "2023.08.00"
 generativeai = "0.1.1"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+loggingInterceptor = "4.11.0"
+okhttp = "5.0.0-alpha.3"
+retrofit = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "daggerAndroid" }
+google-dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "daggerAndroidProcessor" }
+google-dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "daggerAndroidSupport" }
+google-dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "daggerCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -29,9 +45,14 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-android-libraries-mapsplatform-secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleAndroidLibrariesMapsplatformSecretsGradlePlugin" }
+
+
 
