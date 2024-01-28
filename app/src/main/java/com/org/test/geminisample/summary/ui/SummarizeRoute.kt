@@ -12,7 +12,10 @@ internal fun SummarizeRoute(
 ) {
     val summarizeUiState by summarizeViewModel.uiState.collectAsState()
 
-    SummarizeScreen(summarizeUiState, onSummarizeClicked = { inputText ->
-        summarizeViewModel.summarize(inputText)
-    })
+    SummarizeScreen(
+        uiState = summarizeUiState,
+        onSummarizeClicked = { inputText ->
+            summarizeViewModel.summarize(inputText)
+        }
+    )
 }
