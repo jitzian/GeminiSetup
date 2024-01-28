@@ -7,6 +7,7 @@ import com.google.ai.client.generativeai.GenerativeModel
 import com.org.test.geminisample.SummarizeUiState
 import com.org.test.geminisample.constants.GlobalConstants.BASE_URL
 import com.org.test.geminisample.di.component.DaggerNetworkComponent
+import com.org.test.geminisample.di.module.GenerativeModelModule
 import com.org.test.geminisample.di.module.NetworkModule
 import com.org.test.geminisample.remote.rest.api.RestApi
 import kotlinx.coroutines.delay
@@ -17,10 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-//class SummarizeViewModel @Inject constructor(
-class SummarizeViewModel(
-    private val generativeModel: GenerativeModel,
-) : ViewModel() {
+class SummarizeViewModel : ViewModel() {
     private val TAG = SummarizeViewModel::class.java.simpleName
 
     private val _uiState: MutableStateFlow<SummarizeUiState> =
@@ -30,10 +28,14 @@ class SummarizeViewModel(
 
     private val injector = DaggerNetworkComponent.builder()
         .networkModule(NetworkModule(BASE_URL))
+        .generativeModelModule(GenerativeModelModule())
         .build()
 
     @Inject
     lateinit var restApi: RestApi
+
+    @Inject
+    lateinit var generativeModel: GenerativeModel
 
     init {
         injector.inject(this)

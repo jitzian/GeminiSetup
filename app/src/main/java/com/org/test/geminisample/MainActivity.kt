@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                         modelName = "gemini-pro",
                         apiKey = BuildConfig.apiKey
                     )
-                    val viewModel = SummarizeViewModel(generativeModel)
+                    val viewModel = SummarizeViewModel()
                     SummarizeRoute(viewModel)
                 }
             }
