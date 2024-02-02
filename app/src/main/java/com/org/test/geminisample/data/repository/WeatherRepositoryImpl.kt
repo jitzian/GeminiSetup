@@ -2,6 +2,7 @@ package com.org.test.geminisample.data.repository
 
 import com.org.test.geminisample.data.domain.repository.WeatherRepository
 import com.org.test.geminisample.remote.rest.api.WeatherApi
+import com.org.test.geminisample.remote.rest.model.ResultApi
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
@@ -12,5 +13,5 @@ class WeatherRepositoryImpl @Inject constructor(
         longitude: Double,
         pastDays: Int,
         hourly: String
-    ): WeatherApi = weatherApi.fetchWeatherData( latitude, longitude, pastDays, hourly)
+    ): ResultApi = weatherApi.fetchWeatherData( latitude, longitude, pastDays, hourly)
 }
