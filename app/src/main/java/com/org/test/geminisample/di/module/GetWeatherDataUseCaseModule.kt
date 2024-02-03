@@ -1,5 +1,6 @@
 package com.org.test.geminisample.di.module
 
+import com.google.ai.client.generativeai.GenerativeModel
 import com.org.test.geminisample.data.domain.repository.WeatherRepository
 import com.org.test.geminisample.weather.usecase.GetWeatherDataUseCase
 import dagger.Module
@@ -8,10 +9,12 @@ import dagger.Reusable
 
 @Module
 class GetWeatherDataUseCaseModule {
-
     @Provides
     @Reusable
-    fun providesGetWeatherDataUseCase(weatherRepository: WeatherRepository): GetWeatherDataUseCase =
-        GetWeatherDataUseCase(weatherRepository)
+    fun providesGetWeatherDataUseCase(
+        weatherRepository: WeatherRepository,
+        generativeModel: GenerativeModel
+    ): GetWeatherDataUseCase =
+        GetWeatherDataUseCase(weatherRepository, generativeModel)
 
 }
