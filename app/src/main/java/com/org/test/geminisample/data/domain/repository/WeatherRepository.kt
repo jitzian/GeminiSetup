@@ -8,7 +8,10 @@ interface WeatherRepository {
         latitude: Double,
         longitude: Double,
         pastDays: Int,
-        hourly: String
+        hourly: String,
+        daily: String,
+        temperatureUnit: String,
+        timezone: String,
     ): ResultApi
 
 }

@@ -7,11 +7,22 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
     private val weatherApi: WeatherApi
-): WeatherRepository {
+) : WeatherRepository {
     override suspend fun fetchWeatherData(
         latitude: Double,
         longitude: Double,
         pastDays: Int,
-        hourly: String
-    ): ResultApi = weatherApi.fetchWeatherData( latitude, longitude, pastDays, hourly)
+        hourly: String,
+        daily: String,
+        temperatureUnit: String,
+        timezone: String,
+    ): ResultApi = weatherApi.fetchWeatherData(
+        latitude,
+        longitude,
+        pastDays,
+        hourly,
+        daily,
+        temperatureUnit,
+        timezone
+    )
 }
