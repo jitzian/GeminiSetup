@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
 import co.yml.charts.common.components.Legends
 import co.yml.charts.common.extensions.formatToSinglePrecision
+import co.yml.charts.common.model.LegendLabel
 import co.yml.charts.common.model.LegendsConfig
 import co.yml.charts.common.utils.DataUtils
 import co.yml.charts.ui.linechart.LineChart
@@ -53,7 +54,21 @@ fun WeatherCharts(
         }.build()
     val colorPaletteList = listOf<Color>(Color.Blue, Color.Yellow, Color.Magenta, Color.DarkGray)
     val legendsConfig = LegendsConfig(
-        legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
+        //legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
+        legendLabelList = listOf(
+            LegendLabel(
+                name = "Loc 1",
+                color = colorPaletteList.first()
+            ),
+            LegendLabel(
+                name = "Loc 2",
+                color = colorPaletteList[1]
+            ),
+            LegendLabel(
+                name = "Loc 3",
+                color = colorPaletteList[2]
+            ),
+        ),
         gridColumnCount = 4
     )
 
@@ -134,7 +149,8 @@ fun WeatherCharts(
                         ),
                         intersectionPoint = IntersectionPoint(color = Color.Red),
                         selectionHighlightPopUp = SelectionHighlightPopUp(popUpLabel = { x, y ->
-                            val xLabel = "x : ${(1900 + x).toInt()} "
+                            //val xLabel = "x : ${(1900 + x).toInt()} "
+                            val xLabel = "x : ${x.toInt()} "
                             val yLabel = "y : ${String.format("%.2f", y)}"
                             "$xLabel $yLabel"
                         })
@@ -142,7 +158,7 @@ fun WeatherCharts(
 
                     Line(
                         dataPoints = state.pointsDataProjection.take(50),
-                        LineStyle(color = colorPaletteList[3]),
+                        LineStyle(color = colorPaletteList[2]),
                         IntersectionPoint(),
                         SelectionHighlightPoint(),
                         ShadowUnderLine(),
@@ -163,7 +179,11 @@ fun WeatherCharts(
                     .height(300.dp),
                 lineChartData = data
             )
+
             Legends(legendsConfig = legendsConfig)
+//            Legends(legendsConfig = legendsConfig)
+
+
         }
     }
 }

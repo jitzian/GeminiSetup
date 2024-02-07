@@ -1,14 +1,16 @@
 package com.org.test.geminisample.weather.state
 
-import com.org.test.geminisample.data.model.LocationData
+import co.yml.charts.common.model.Point
 
 sealed interface UIState {
     data object Initial : UIState
     data class Loading(val message: String? = null) : UIState
     data class Success(
-        val location1Data: LocationData = LocationData(emptyList(), emptyList()),
-        val location2Data: LocationData = LocationData(emptyList(), emptyList()),
-        val projectionData: LocationData? = null,
+        val isLoading: Boolean = false,
+        val pointsDataLocation1: List<Point> = emptyList(),
+        val pointsDataLocation2: List<Point> = emptyList(),
+        val pointsDataProjection: List<Point> = emptyList(),
+        val dates: List<String> = emptyList(),
     ) : UIState
 
     data class Error(
