@@ -43,7 +43,11 @@ fun WeatherScreenState(
     val state by weatherViewModel.state.collectAsState()
     when (state) {
         is UIState.Initial -> weatherViewModel.fetchWeatherData()
-        is UIState.Error -> ErrorScreen(message = (state as UIState.Error).errorMessage)
+        is UIState.Error -> ErrorScreen(
+            message = (state as UIState.Error).errorMessage,
+            fetchData = weatherViewModel::fetchWeatherData,
+        )
+
         is UIState.Loading -> LoadingScreen()
         is UIState.Success -> WeatherScreen(
             data = (state as UIState.Success),
