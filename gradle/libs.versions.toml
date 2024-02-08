@@ -1,4 +1,5 @@
 [versions]
+accompanistSwiperefresh = "0.34.0"
 agp = "8.4.0-alpha07"
 converterGson = "2.9.0"
 dagger = "2.48"
@@ -7,7 +8,6 @@ daggerAndroidProcessor = "2.40.5"
 daggerAndroidSupport = "2.40.5"
 daggerCompiler = "2.48"
 kotlin = "1.9.0"
-#kotlin = "1.6.10"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -21,9 +21,13 @@ googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
 loggingInterceptor = "4.11.0"
 okhttp = "5.0.0-alpha.3"
 retrofit = "2.9.0"
+swiperefreshlayout = "1.1.0"
+ycharts = "2.1.0"
 
 [libraries]
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "daggerAndroid" }
@@ -48,6 +52,7 @@ generativeai = { group = "com.google.ai.client.generativeai", name = "generative
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+ycharts = { module = "co.yml:ycharts", version.ref = "ycharts" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

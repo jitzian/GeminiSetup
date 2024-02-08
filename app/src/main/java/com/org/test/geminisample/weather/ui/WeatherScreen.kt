@@ -1,6 +1,7 @@
+@file:Suppress("DEPRECATION")
+
 package com.org.test.geminisample.weather.ui
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,33 +21,34 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.org.test.geminisample.summary.ui.LoadingScreen
 import com.org.test.geminisample.ui.theme.GeminiSampleTheme
 import com.org.test.geminisample.weather.state.UIState
-import com.org.test.geminisample.weather.ui.MenuSelection.*
-import com.org.test.geminisample.weather.ui.common.CustomFloatingButton
+import com.org.test.geminisample.weather.ui.MenuSelection.SELECTION_1
+import com.org.test.geminisample.weather.ui.common.FloatingMenu
 import com.org.test.geminisample.weather.viewodel.WeatherViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun WeatherScreenState(
     weatherViewModel: WeatherViewModel = viewModel(),
 ) {
     val state by weatherViewModel.state.collectAsState()
-
     when (state) {
         is UIState.Initial -> weatherViewModel.fetchWeatherData()
         is UIState.Error -> ErrorScreen(message = (state as UIState.Error).errorMessage)
         is UIState.Loading -> LoadingScreen()
-        //is UIState.Success -> WeatherScreen(data = (state as UIState.Success))
         is UIState.Success -> WeatherScreen(
             data = (state as UIState.Success),
             fetchData = weatherViewModel::fetchWeatherData
         )
-        //is UIState.Success -> ErrorScreen(message = "Something went wrong!", errorCode = "404")
     }
 
 }
@@ -62,37 +64,43 @@ fun WeatherScreen(
 
     Scaffold(topBar = { TopAppBar(title = { Text(text = "Weather") }) },
         content = { paddingValues ->
-            LazyColumn(modifier = modifier
-                .fillMaxSize()
-                .padding(paddingValues), content = {
-                item {
-                    WeatherCharts(
-                        state = data, modifier = Modifier.fillMaxWidth()
-                    )
+
+            val coroutineScope = rememberCoroutineScope()
+            val isRefreshing = remember { mutableStateOf(false) }
+            val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing.value)
+
+            SwipeRefresh(
+                state = swipeRefreshState,
+                onRefresh = {
+                    coroutineScope.launch {
+                        isRefreshing.value = true
+                        fetchData?.invoke(SELECTION_1)
+                        isRefreshing.value = false
+                    }
                 }
-            })
+            ) {
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    content = {
+                        item {
+                            WeatherCharts(
+                                state = data, modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
+                )
+            }
         },
         floatingActionButton = {
             Column {
-                AnimatedVisibility(visible = menuExpanded.value) {
-                    Column {
-                        CustomFloatingButton(
-                            content = "1",
-                            modifier = Modifier.padding(bottom = 16.dp),
-                            action = { fetchData?.invoke(SELECTION_1) }
-                        )
-                        CustomFloatingButton(
-                            content = "2",
-                            modifier = Modifier.padding(bottom = 16.dp),
-                            action = { fetchData?.invoke(SELECTION_2) }
-                        )
-                        CustomFloatingButton(
-                            content = "3",
-                            modifier = Modifier.padding(bottom = 16.dp),
-                            action = { fetchData?.invoke(SELECTION_3) }
-                        )
-                    }
-                }
+
+                FloatingMenu(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    fetchData = { fetchData?.invoke(SELECTION_1) },
+                    menuExpanded = menuExpanded.value
+                )
                 FloatingActionButton(onClick = { menuExpanded.value = !menuExpanded.value }) {
                     Icon(
                         imageVector = if (menuExpanded.value) Icons.Default.KeyboardArrowDown
@@ -100,14 +108,11 @@ fun WeatherScreen(
                     )
                 }
             }
-        })
+        }
+    )
 
 }
 
 @Preview
 @Composable
-private fun PreviewWeatherScreenState() {
-    GeminiSampleTheme {
-        WeatherScreenState()
-    }
-}
+private fun PreviewWeatherScreenState() = GeminiSampleTheme { WeatherScreenState() }

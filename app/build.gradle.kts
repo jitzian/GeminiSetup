@@ -87,4 +87,47 @@ dependencies {
     implementation(libs.dagger.android)
     implementation(libs.google.dagger.android.support)
     kapt(libs.google.dagger.android.processor)
+
+    implementation(libs.ycharts)
+    implementation(libs.accompanist.swiperefresh)
+    implementation(libs.androidx.swiperefreshlayout)
+}
+
+dependencies {
+    val lifecycleVersion = "2.7.0"
+    val archVersion = "2.2.0"
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    // Lifecycle utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
+
+    // Saved state module for ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion")
+
+    // Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
+
+    // optional - helpers for implementing LifecycleOwner in a Service
+    implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
+
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
+    implementation("androidx.lifecycle:lifecycle-process:$lifecycleVersion")
+
+    // optional - ReactiveStreams support for LiveData
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion")
+
+    // optional - Test helpers for LiveData
+    testImplementation("androidx.arch.core:core-testing:$archVersion")
+
+    // optional - Test helpers for Lifecycle runtime
+    testImplementation ("androidx.lifecycle:lifecycle-runtime-testing:$lifecycleVersion")
 }
