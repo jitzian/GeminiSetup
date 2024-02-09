@@ -2,7 +2,7 @@ package com.org.test.geminisample.di.component
 
 import com.org.test.geminisample.di.module.GenerativeModelModule
 import com.org.test.geminisample.di.module.GetSummarizeInputUseCaseModule
-import com.org.test.geminisample.summary.viewmodel.SummaryViewModel
+import com.org.test.geminisample.feature.summary.viewmodel.SummaryViewModel
 import dagger.Component
 
 @Component(

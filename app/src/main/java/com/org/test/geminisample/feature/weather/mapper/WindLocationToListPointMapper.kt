@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.mapper
+package com.org.test.geminisample.feature.weather.mapper
 
 import co.yml.charts.common.model.Point
 import javax.inject.Inject

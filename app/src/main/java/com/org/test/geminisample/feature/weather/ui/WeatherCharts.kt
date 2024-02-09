@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.ui
+package com.org.test.geminisample.feature.weather.ui
 
 import android.graphics.Typeface
 import androidx.compose.foundation.layout.Column
@@ -27,7 +27,7 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
-import com.org.test.geminisample.weather.state.UIState
+import com.org.test.geminisample.feature.weather.state.UIState
 
 @Composable
 fun WeatherCharts(

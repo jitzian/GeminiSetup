@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.viewodel
+package com.org.test.geminisample.feature.weather.viewodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -9,9 +9,9 @@ import com.org.test.geminisample.di.module.GenerativeModelModule
 import com.org.test.geminisample.di.module.GetWeatherDataUseCaseModule
 import com.org.test.geminisample.di.module.RemoteModule
 import com.org.test.geminisample.di.module.WeatherRepositoryModule
-import com.org.test.geminisample.weather.state.UIState
-import com.org.test.geminisample.weather.ui.MenuSelection
-import com.org.test.geminisample.weather.usecase.GetWeatherDataUseCase
+import com.org.test.geminisample.feature.weather.state.UIState
+import com.org.test.geminisample.feature.weather.ui.MenuSelection
+import com.org.test.geminisample.feature.weather.usecase.GetWeatherDataUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

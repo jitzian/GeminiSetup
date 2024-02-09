@@ -1,4 +1,4 @@
-package com.org.test.geminisample.summary.state
+package com.org.test.geminisample.feature.summary.state
 
 sealed interface UIState {
     data object Initial : UIState

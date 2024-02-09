@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.org.test.geminisample.weather.ui
+package com.org.test.geminisample.feature.weather.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -2,7 +2,7 @@ package com.org.test.geminisample.di.component
 
 import com.org.test.geminisample.di.module.GenerativeModelModule
 import com.org.test.geminisample.di.module.NetworkModule
-import com.org.test.geminisample.summary.viewmodel.SummarizeViewModel
+import com.org.test.geminisample.feature.summary.viewmodel.SummarizeViewModel
 import dagger.Component
 
 @Component(

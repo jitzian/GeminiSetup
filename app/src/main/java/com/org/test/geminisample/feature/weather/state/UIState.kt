@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.state
+package com.org.test.geminisample.feature.weather.state
 
 import co.yml.charts.common.model.Point
 

@@ -1,4 +1,4 @@
-package com.org.test.geminisample.summary.viewmodel
+package com.org.test.geminisample.feature.summary.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.org.test.geminisample.summary.ui
+package com.org.test.geminisample.feature.summary.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

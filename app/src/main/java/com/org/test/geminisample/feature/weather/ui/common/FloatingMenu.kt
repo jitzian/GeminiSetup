@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.ui.common
+package com.org.test.geminisample.feature.weather.ui.common
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column

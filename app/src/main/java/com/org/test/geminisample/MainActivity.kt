@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.org.test.geminisample.ui.theme.GeminiSampleTheme
-import com.org.test.geminisample.weather.ui.WeatherScreenState
+import com.org.test.geminisample.feature.weather.ui.WeatherScreenState
 
 class MainActivity : ComponentActivity() {
 

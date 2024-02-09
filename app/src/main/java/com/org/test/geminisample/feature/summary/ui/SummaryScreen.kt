@@ -1,4 +1,4 @@
-package com.org.test.geminisample.summary.ui
+package com.org.test.geminisample.feature.summary.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,10 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.org.test.geminisample.R
-import com.org.test.geminisample.summary.state.UIState
-import com.org.test.geminisample.summary.viewmodel.SummaryViewModel
+import com.org.test.geminisample.feature.summary.state.UIState
+import com.org.test.geminisample.feature.summary.viewmodel.SummaryViewModel
 import com.org.test.geminisample.ui.theme.GeminiSampleTheme
-import com.org.test.geminisample.weather.ui.ErrorScreen
+import com.org.test.geminisample.feature.weather.ui.ErrorScreen
 
 @Composable
 fun SummaryScreenState(viewModel: SummaryViewModel = viewModel()) {

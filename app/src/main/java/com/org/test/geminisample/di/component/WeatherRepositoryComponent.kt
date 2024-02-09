@@ -2,7 +2,7 @@ package com.org.test.geminisample.di.component
 
 import com.org.test.geminisample.di.module.NetworkModule
 import com.org.test.geminisample.di.module.WeatherRepositoryModule
-import com.org.test.geminisample.weather.usecase.GetWeatherDataUseCase
+import com.org.test.geminisample.feature.weather.usecase.GetWeatherDataUseCase
 import dagger.Component
 
 @Component(

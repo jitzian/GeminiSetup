@@ -1,6 +1,6 @@
-package com.org.test.geminisample.weather.usecase
+package com.org.test.geminisample.feature.weather.usecase
 
-import com.org.test.geminisample.weather.ui.MenuSelection
+import com.org.test.geminisample.feature.weather.ui.MenuSelection
 
 fun generativePrompt(
     timeLocation1: String,

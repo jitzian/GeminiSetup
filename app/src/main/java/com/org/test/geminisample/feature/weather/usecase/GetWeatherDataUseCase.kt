@@ -1,12 +1,12 @@
-package com.org.test.geminisample.weather.usecase
+package com.org.test.geminisample.feature.weather.usecase
 
 import android.util.Log
 import com.google.ai.client.generativeai.GenerativeModel
 import com.org.test.geminisample.data.domain.repository.WeatherRepository
 import com.org.test.geminisample.data.model.LocationsData
 import com.org.test.geminisample.utils.ktx.toStringList
-import com.org.test.geminisample.weather.mapper.WindLocationToListPointMapper
-import com.org.test.geminisample.weather.ui.MenuSelection
+import com.org.test.geminisample.feature.weather.mapper.WindLocationToListPointMapper
+import com.org.test.geminisample.feature.weather.ui.MenuSelection
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

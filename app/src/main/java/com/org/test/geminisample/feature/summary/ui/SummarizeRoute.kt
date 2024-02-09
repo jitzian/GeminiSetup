@@ -1,10 +1,10 @@
-package com.org.test.geminisample.summary.ui
+package com.org.test.geminisample.feature.summary.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.org.test.geminisample.summary.viewmodel.SummarizeViewModel
+import com.org.test.geminisample.feature.summary.viewmodel.SummarizeViewModel
 
 @Composable
 internal fun SummarizeRoute(

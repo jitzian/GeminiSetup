@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.ui
+package com.org.test.geminisample.feature.weather.ui
 
 import android.graphics.Typeface
 import androidx.compose.foundation.layout.Column

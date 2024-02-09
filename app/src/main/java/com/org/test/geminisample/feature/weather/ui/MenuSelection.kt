@@ -1,4 +1,4 @@
-package com.org.test.geminisample.weather.ui
+package com.org.test.geminisample.feature.weather.ui
 
 enum class MenuSelection(val param: Int) {
     SELECTION_1(1),

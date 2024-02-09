@@ -4,7 +4,7 @@ import com.org.test.geminisample.di.module.GenerativeModelModule
 import com.org.test.geminisample.di.module.GetWeatherDataUseCaseModule
 import com.org.test.geminisample.di.module.RemoteModule
 import com.org.test.geminisample.di.module.WeatherRepositoryModule
-import com.org.test.geminisample.weather.viewodel.WeatherViewModel
+import com.org.test.geminisample.feature.weather.viewodel.WeatherViewModel
 import dagger.Component
 
 @Component(

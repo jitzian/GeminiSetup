@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.org.test.geminisample.weather.ui
+package com.org.test.geminisample.feature.weather.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,13 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import com.org.test.geminisample.summary.ui.LoadingScreen
-import com.org.test.geminisample.summary.ui.SummaryScreenState
+import com.org.test.geminisample.feature.summary.ui.LoadingScreen
+import com.org.test.geminisample.feature.summary.ui.SummaryScreenState
 import com.org.test.geminisample.ui.theme.GeminiSampleTheme
-import com.org.test.geminisample.weather.state.UIState
-import com.org.test.geminisample.weather.ui.MenuSelection.SELECTION_1
-import com.org.test.geminisample.weather.ui.common.FloatingMenu
-import com.org.test.geminisample.weather.viewodel.WeatherViewModel
+import com.org.test.geminisample.feature.weather.state.UIState
+import com.org.test.geminisample.feature.weather.ui.MenuSelection.SELECTION_1
+import com.org.test.geminisample.feature.weather.ui.common.FloatingMenu
+import com.org.test.geminisample.feature.weather.viewodel.WeatherViewModel
 import kotlinx.coroutines.launch
 
 @Composable

@@ -1,7 +1,7 @@
-package com.org.test.geminisample.weather.usecase
+package com.org.test.geminisample.feature.weather.usecase
 
 import com.google.ai.client.generativeai.GenerativeModel
-import com.org.test.geminisample.summary.state.UIState
+import com.org.test.geminisample.feature.summary.state.UIState
 import javax.inject.Inject
 
 class GetSummarizeInputUseCase @Inject constructor(
