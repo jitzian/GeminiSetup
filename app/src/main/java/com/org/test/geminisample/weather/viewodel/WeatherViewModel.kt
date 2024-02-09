@@ -12,6 +12,7 @@ import com.org.test.geminisample.di.module.WeatherRepositoryModule
 import com.org.test.geminisample.weather.state.UIState
 import com.org.test.geminisample.weather.ui.MenuSelection
 import com.org.test.geminisample.weather.usecase.GetWeatherDataUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,7 +45,7 @@ class WeatherViewModel : ViewModel() {
     }
 
     fun fetchWeatherData(selection: MenuSelection? = MenuSelection.SELECTION_1) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _state.update { UIState.Loading() }
             delay(2.seconds)
             val data = getWeatherDataUseCase.prepareData(

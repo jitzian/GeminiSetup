@@ -22,6 +22,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +31,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.org.test.geminisample.summary.ui.LoadingScreen
+import com.org.test.geminisample.summary.ui.SummaryScreenState
 import com.org.test.geminisample.ui.theme.GeminiSampleTheme
 import com.org.test.geminisample.weather.state.UIState
 import com.org.test.geminisample.weather.ui.MenuSelection.SELECTION_1
@@ -41,19 +44,25 @@ fun WeatherScreenState(
     weatherViewModel: WeatherViewModel = viewModel(),
 ) {
     val state by weatherViewModel.state.collectAsState()
-    when (state) {
-        is UIState.Initial -> weatherViewModel.fetchWeatherData()
-        is UIState.Error -> ErrorScreen(
-            message = (state as UIState.Error).errorMessage,
-            fetchData = weatherViewModel::fetchWeatherData,
-        )
+    var showCharts by rememberSaveable { mutableStateOf(true) }
+    val updateShowCharts: () -> Unit = { showCharts = !showCharts }
 
-        is UIState.Loading -> LoadingScreen()
-        is UIState.Success -> WeatherScreen(
-            data = (state as UIState.Success),
-            fetchData = weatherViewModel::fetchWeatherData
-        )
-    }
+    if (showCharts) {
+        when (state) {
+            is UIState.Initial -> weatherViewModel.fetchWeatherData()
+            is UIState.Error -> ErrorScreen(
+                message = (state as UIState.Error).errorMessage,
+                fetchData = weatherViewModel::fetchWeatherData,
+            )
+
+            is UIState.Loading -> LoadingScreen()
+            is UIState.Success -> WeatherScreen(
+                data = (state as UIState.Success),
+                fetchData = weatherViewModel::fetchWeatherData,
+                updateShowCharts = updateShowCharts
+            )
+        }
+    } else SummaryScreenState()
 
 }
 
@@ -63,6 +72,7 @@ fun WeatherScreen(
     modifier: Modifier = Modifier,
     data: UIState.Success,
     fetchData: ((MenuSelection?) -> Unit)? = null,
+    updateShowCharts: () -> Unit,
 ) {
     val menuExpanded = remember { mutableStateOf(false) }
 
@@ -103,7 +113,8 @@ fun WeatherScreen(
                 FloatingMenu(
                     modifier = Modifier.padding(bottom = 16.dp),
                     fetchData = { fetchData?.invoke(SELECTION_1) },
-                    menuExpanded = menuExpanded.value
+                    menuExpanded = menuExpanded.value,
+                    updateShowCharts = updateShowCharts,
                 )
                 FloatingActionButton(onClick = { menuExpanded.value = !menuExpanded.value }) {
                     Icon(

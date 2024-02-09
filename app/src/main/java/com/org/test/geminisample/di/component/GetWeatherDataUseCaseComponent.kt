@@ -21,7 +21,7 @@ interface GetWeatherDataUseCaseComponent {
 
     @Component.Builder
     interface Builder {
-        fun getWeatherDataUseCaseModule(getWeatherDataUseCaseModule: GetWeatherDataUseCaseModule): Builder
+        fun getWeatherDataUseCaseModule(getDataUseCasesModule: GetWeatherDataUseCaseModule): Builder
         fun weatherRepositoryModule(weatherRepositoryModule: WeatherRepositoryModule): Builder
         fun generativeModelModule(generativeModelModule: GenerativeModelModule): Builder
         fun remoteModule(remoteModule: RemoteModule): Builder

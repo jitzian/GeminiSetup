@@ -3,7 +3,9 @@
 package com.org.test.geminisample.weather.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -32,52 +34,46 @@ fun ErrorScreen(
     fetchData: (() -> Unit)? = null
 ) {
 
-    val coroutineScope = rememberCoroutineScope()
-    val isRefreshing = remember { mutableStateOf(false) }
-    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = isRefreshing.value)
-
-    SwipeRefresh(
-        state = swipeRefreshState,
-        onRefresh = {
-            coroutineScope.launch {
-                isRefreshing.value = true
-                fetchData?.invoke()
-                isRefreshing.value = false
-            }
-        }
-    ) {
-        Column(modifier = modifier.fillMaxWidth()) {
-            errorCode?.let {
-                Text(
-                    text = it,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.displayLarge,
-                    fontWeight = FontWeight.Bold,
-                )
-            }
+    Column(modifier = modifier.fillMaxSize()) {
+        errorCode?.let {
             Text(
-                text = message,
+                text = it,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 32.dp),
+                    .padding(vertical = 16.dp),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.displayLarge,
                 fontWeight = FontWeight.Bold,
             )
-            Image(
-                painter = painterResource(id = R.drawable.sad_boy_error),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        horizontal = 32.dp,
-                        vertical = 32.dp
-                    )
-            )
         }
+        Text(
+            text = message,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, bottom = 32.dp),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        Image(
+            painter = painterResource(id = R.drawable.sad_boy_error),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 32.dp,
+                    vertical = 32.dp
+                )
+        )
+
+        Text(
+            text = "Refresh?",
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { fetchData?.invoke() },
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium,
+        )
     }
 
 }
