@@ -1,6 +1,6 @@
 package com.org.test.geminisample.di.component
 
-import com.org.test.geminisample.di.module.NetworkModule
+import com.org.test.geminisample.di.module.RemoteModule
 import com.org.test.geminisample.di.module.WeatherRepositoryModule
 import com.org.test.geminisample.feature.weather.usecase.GetWeatherDataUseCase
 import dagger.Component
@@ -8,7 +8,7 @@ import dagger.Component
 @Component(
     modules = [
         WeatherRepositoryModule::class,
-        NetworkModule::class,
+        RemoteModule::class,
     ]
 )
 interface WeatherRepositoryComponent {
@@ -18,7 +18,7 @@ interface WeatherRepositoryComponent {
     @Component.Builder
     interface Builder {
         fun weatherRepositoryModule(weatherRepositoryModule: WeatherRepositoryModule): Builder
-        fun networkModule(networkModule: NetworkModule): Builder
+        fun remoteModule(remoteModule: RemoteModule): Builder
         fun build(): WeatherRepositoryComponent
     }
 

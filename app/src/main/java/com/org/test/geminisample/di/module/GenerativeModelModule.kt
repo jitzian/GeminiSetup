@@ -13,8 +13,7 @@ class GenerativeModelModule {
     @Reusable
     fun providesGenerativeModule() = GenerativeModel(
         modelName = "gemini-pro",
-        apiKey = ""
+        apiKey = BuildConfig.apiKey
     )
-
 
 }
