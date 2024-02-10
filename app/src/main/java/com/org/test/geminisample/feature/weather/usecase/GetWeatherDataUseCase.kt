@@ -24,7 +24,6 @@ class GetWeatherDataUseCase @Inject constructor(
     private val scope = CoroutineScope(
         Dispatchers.IO + SupervisorJob() + CoroutineExceptionHandler { _, throwable ->
             Log.e(TAG, "CoroutineExceptionHandler: ${throwable.message}")
-            LocationsData()
         }
     )
 
@@ -41,49 +40,71 @@ class GetWeatherDataUseCase @Inject constructor(
         selection: MenuSelection? = MenuSelection.SELECTION_1,
     ): LocationsData = scope.async {
 
-        val location1 = async {
-            repository.fetchWeatherData(
-                latitude1,
-                longitude1,
-                pastDays,
-                hourly,
-                daily,
-                temperatureUnit,
-                timezone
+        try {
+            val location1 = async {
+                repository.fetchWeatherData(
+                    latitude1,
+                    longitude1,
+                    pastDays,
+                    hourly,
+                    daily,
+                    temperatureUnit,
+                    timezone
+                )
+            }.await()
+
+            val location2 = async {
+                repository.fetchWeatherData(
+                    latitude2,
+                    longitude2,
+                    pastDays,
+                    hourly,
+                    daily,
+                    temperatureUnit,
+                    timezone
+                )
+            }.await()
+
+            val dateLocation1 = location1.hourly.time.map { it }.toStringList
+            val windSpeedLocation1 =
+                location1.hourly.wind_speed_10m.map { it.toString() }.toStringList
+
+            val dateLocation2 = location2.hourly.time.map { it }.toStringList
+            val windSpeedLocation2 =
+                location2.hourly.wind_speed_10m.map { it.toString() }.toStringList
+
+            val prompt = generativePrompt(
+                dateLocation1,
+                windSpeedLocation1,
+                dateLocation2,
+                windSpeedLocation2,
+                selection?.param,
             )
-        }.await()
-
-        val location2 = async {
-            repository.fetchWeatherData(
-                latitude2,
-                longitude2,
-                pastDays,
-                hourly,
-                daily,
-                temperatureUnit,
-                timezone
-            )
-        }.await()
-
-        val dateLocation1 = location1.hourly.time.map { it }.toStringList
-        val windSpeedLocation1 = location1.hourly.wind_speed_10m.map { it.toString() }.toStringList
-
-        val dateLocation2 = location2.hourly.time.map { it }.toStringList
-        val windSpeedLocation2 = location2.hourly.wind_speed_10m.map { it.toString() }.toStringList
-
-        val prompt = generativePrompt(
-            dateLocation1,
-            windSpeedLocation1,
-            dateLocation2,
-            windSpeedLocation2,
-            selection?.param,
-        )
 
 
-        generativeModel.generateContent(prompt).text?.let { response ->
-            Log.e(TAG, "prepareData_:generativeModel::it:: >>>>>>>> \uD83E\uDD16 $response")
+            generativeModel.generateContent(prompt).text?.let { response ->
+                Log.e(TAG, "prepareData_:generativeModel::it:: >>>>>>>> \uD83E\uDD16 $response")
 
-            return@async LocationsData(
+                return@async LocationsData(
+                    pointsDataLocation1 = windLocationToListPointMapper.invoke(
+                        response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                    ),
+                    pointsDataLocation2 = windLocationToListPointMapper.invoke(
+                        //response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                        response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                            .map { (it.toFloat() + Random.nextInt(1, 11)).toString() }
+                    ),
+                    pointsDataProjection = windLocationToListPointMapper.invoke(
+                        //response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                        response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
+                            .map { (it.toFloat() + Random.nextInt(1, 3)).toString() }
+                    ),
+                    dates = location1.hourly.time
+                )
+            }
+
+            return@async LocationsData()
+            /*return@async LocationsData(
                 pointsDataLocation1 = windLocationToListPointMapper.invoke(
                     response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
                 ),
@@ -97,27 +118,12 @@ class GetWeatherDataUseCase @Inject constructor(
                     response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
                         .map { (it.toFloat() + Random.nextInt(1, 3)).toString() }
                 ),
-                dates = location1.hourly.time
-            )
+                dates = location1.hourly.time,
+            )*/
+        } catch (e: Exception) {
+            Log.e(TAG, "prepareData::exception::${e.message}")
+            return@async LocationsData()
         }
-
-        return@async LocationsData()
-        /*return@async LocationsData(
-            pointsDataLocation1 = windLocationToListPointMapper.invoke(
-                response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-            ),
-            pointsDataLocation2 = windLocationToListPointMapper.invoke(
-                //response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-                response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-                    .map { (it.toFloat() + Random.nextInt(1, 11)).toString() }
-            ),
-            pointsDataProjection = windLocationToListPointMapper.invoke(
-                //response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-                response.split(",").map { it.trim() }.filter { it.isNotEmpty() }
-                    .map { (it.toFloat() + Random.nextInt(1, 3)).toString() }
-            ),
-            dates = location1.hourly.time,
-        )*/
     }.await()
 
 }
