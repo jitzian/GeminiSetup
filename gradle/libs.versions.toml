@@ -1,6 +1,6 @@
 [versions]
 accompanistSwiperefresh = "0.34.0"
-agp = "8.4.0-alpha07"
+agp = "8.4.0-alpha09"
 converterGson = "2.9.0"
 dagger = "2.48"
 daggerAndroid = "2.40.5"
