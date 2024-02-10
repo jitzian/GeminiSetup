@@ -13,7 +13,6 @@ import com.org.test.geminisample.ui.theme.GeminiSampleTheme
 fun FloatingMenu(
     modifier: Modifier = Modifier,
     fetchData: () -> Unit,
-    updateShowCharts: () -> Unit,
     menuExpanded: Boolean,
 ) {
     AnimatedVisibility(visible = menuExpanded, modifier = modifier) {
@@ -33,11 +32,6 @@ fun FloatingMenu(
                 modifier = Modifier.padding(bottom = 16.dp),
                 action = fetchData
             )
-            CustomFloatingButton(
-                content = "Type",
-                modifier = Modifier.padding(bottom = 16.dp),
-                action = updateShowCharts
-            )
         }
     }
 }
@@ -47,7 +41,6 @@ fun FloatingMenu(
 private fun PrevFloatingMenu() = GeminiSampleTheme {
     FloatingMenu(
         fetchData = { },
-        updateShowCharts = { },
         menuExpanded = true,
     )
 }
