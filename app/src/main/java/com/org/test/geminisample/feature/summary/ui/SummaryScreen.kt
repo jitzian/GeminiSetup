@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -61,11 +62,22 @@ fun SummaryScreen(
         Row {
             TextField(
                 value = prompt,
-                label = { Text(stringResource(R.string.summarize_label)) },
-                placeholder = { Text(stringResource(R.string.summarize_hint)) },
+                label = {
+                    Text(
+                        text = stringResource(R.string.summarize_label),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                },
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.summarize_hint),
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                },
                 onValueChange = { prompt = it },
                 modifier = Modifier
-                    .weight(8f)
+                    .weight(8f),
+                textStyle = MaterialTheme.typography.bodyMedium,
             )
             TextButton(
                 onClick = { if (prompt.isNotBlank()) onSummarize.invoke(prompt) },
@@ -83,7 +95,8 @@ fun SummaryScreen(
                 text = data,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(all = 8.dp)
+                    .padding(all = 8.dp),
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }
