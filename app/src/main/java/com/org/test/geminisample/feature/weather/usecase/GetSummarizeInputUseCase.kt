@@ -7,12 +7,8 @@ import javax.inject.Inject
 class GetSummarizeInputUseCase @Inject constructor(
     private val generativeModel: GenerativeModel,
 ) {
-
     suspend fun summarizeInput(input: String) = try {
-        UIState.Success(
-            generativeModel.generateContent("Summarize the following text for me: $input").text
-                ?: ""
-        )
+        UIState.Success(generativeModel.generateContent(generativePrompt(input)).text ?: "")
     } catch (e: Exception) {
         UIState.Error(e.message ?: "")
     }
