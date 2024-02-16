@@ -6,6 +6,11 @@ import retrofit2.http.Query
 
 interface WeatherApi {
     /**
+     * *********************************************************************************************
+     * Documentation:
+     * https://open-meteo.com/
+     * https://open-meteo.com/en/docs#latitude=40.0552&longitude=-83.1288&hourly=temperature_2m,snow_depth&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,daylight_duration,sunshine_duration&temperature_unit=fahrenheit&timezone=auto
+     * *********************************************************************************************
      * https://api.open-meteo.com/v1/forecast?
      * latitude=40.0552&
      * longitude=-83.1288&
